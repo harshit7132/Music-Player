@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_player/Pages/SongPage.dart';
+import 'package:music_player/Pages/SplaceScreen.dart';
+import 'package:music_player/config/Theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,12 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Music Player',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: SongPage(),
+      theme: darkTheme,
+      home: const SongPage()
     );
   }
 }
