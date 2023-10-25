@@ -26,7 +26,7 @@ class SongControllerButtons extends StatelessWidget {
           children: [
             SvgPicture.asset(
               "assets/icons/back.svg",
-              width: 25,
+              width: 20,
             ),
             SizedBox(width: 40),
             Container(
@@ -40,14 +40,14 @@ class SongControllerButtons extends StatelessWidget {
               child: Center(
                 child: SvgPicture.asset(
                   "assets/icons/play.svg",
-                  width: 25,
+                  width: 20,
                 ),
               ),
             ),
             SizedBox(width: 40),
             SvgPicture.asset(
               "assets/icons/next.svg",
-              width: 25,
+              width: 20,
             ),
           ],
         ),
@@ -57,19 +57,19 @@ class SongControllerButtons extends StatelessWidget {
           children: [
             SvgPicture.asset(
               "assets/icons/suffle.svg",
-              width: 25,
+              width: 20,
             ),
             SvgPicture.asset(
               "assets/icons/repeat.svg",
-              width: 25,
+              width: 20,
             ),
             SvgPicture.asset(
               "assets/icons/songbook.svg",
-              width: 25,
+              width: 20,
             ),
             SvgPicture.asset(
               "assets/icons/heart.svg",
-              width: 25,
+              width: 20,
             ),
           ],
         ),
