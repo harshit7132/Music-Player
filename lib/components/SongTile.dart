@@ -3,7 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:music_player/config/Colors.dart';
 
 class SongTile extends StatelessWidget {
-  const SongTile({super.key});
+  final String songName;
+  const SongTile({super.key, required this.songName});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +18,12 @@ class SongTile extends StatelessWidget {
       child: Row(children: [
         SvgPicture.asset("assets/icons/play.svg"),
         SizedBox(width: 10),
-        Text(
-          "Chalo bulawa aya hai mata ",
-          style: Theme.of(context).textTheme.bodyMedium,
+        Flexible(
+          child: Text(
+            "$songName",
+            maxLines: 1,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
         )
       ]),
     );
