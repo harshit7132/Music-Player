@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:music_player/Pages/PlaySongPage.dart';
 import 'package:music_player/components/SongTile.dart';
 import 'package:music_player/components/TrendingSogSlider.dart';
 import 'package:music_player/components/songHeader.dart';
 import 'package:music_player/config/Colors.dart';
+import 'package:music_player/controller/SongPlayerController.dart';
 import 'package:music_player/controller/songDataController.dart';
 
 class SongPage extends StatelessWidget {
@@ -12,6 +14,7 @@ class SongPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SongDataController songDataController = Get.put(SongDataController());
+    SongPlayerController songPlayerController = Get.put(SongPlayerController());
     return Scaffold(
         body: SafeArea(
       child: Padding(
@@ -42,34 +45,38 @@ class SongPage extends StatelessWidget {
                                       : primaryColor,
                                 ))),
                     InkWell(
-                        onTap: () {
-                          songDataController.isDeviceSong.value = true;
-                        },
-                        child: Text("Device Song",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(
-                                  color: songDataController.isDeviceSong.value
-                                      ? primaryColor
-                                      : lableColor,
-                                ))),
+                      onTap: () {
+                        songDataController.isDeviceSong.value = true;
+                      },
+                      child: Text(
+                        "Device Song",
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: songDataController.isDeviceSong.value
+                                  ? primaryColor
+                                  : lableColor,
+                            ),
+                      ),
+                    ),
                   ],
                 ),
               ),
               const SizedBox(height: 20),
-              Obx(() => songDataController.isDeviceSong.value
-                  ? Column(
-                      children: songDataController.localSongList.value
-                          .map((e) => SongTile(
-                            songName: e.title,
-                          ))
-                          .toList())
-                  : Column(
-                      children: [
-                     
-                      ],
-                    ))
+              Obx(
+                () => songDataController.isDeviceSong.value
+                    ? Column(
+                        children: songDataController.localSongList.value
+                            .map((e) => SongTile(
+                              onPress: (){
+                                  songPlayerController.playLocalAudio(e.data);
+                                  Get.to(PlaySongPage());
+                              },
+                                  songName: e.title,
+                                ))
+                            .toList())
+                    : Column(
+                        children: [],
+                      ),
+              )
             ],
           ),
         ),

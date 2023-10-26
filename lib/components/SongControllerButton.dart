@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:music_player/config/Colors.dart';
+import 'package:music_player/controller/SongPlayerController.dart';
 
 class SongControllerButtons extends StatelessWidget {
   const SongControllerButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SongPlayerController songPlayerController = Get.put(SongPlayerController());
     return Column(
       children: [
         Row(
@@ -29,20 +32,48 @@ class SongControllerButtons extends StatelessWidget {
               width: 20,
             ),
             SizedBox(width: 40),
-            Container(
-              width: 60,
-              height: 60,
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  "assets/icons/play.svg",
-                  width: 20,
-                ),
-              ),
+            Obx(
+              () => songPlayerController.isPlaying.value
+                  ? InkWell(
+                    onTap: (){
+                      songPlayerController.pausePlaying();
+                    },
+                    child: Container(
+                        width: 60,
+                        height: 60,
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: Center(
+                          child: SvgPicture.asset(
+                            "assets/icons/pause.svg",
+                            width: 20,
+                          ),
+                        ),
+                      ),
+                  )
+                  : InkWell(
+                    onTap: (){
+                      songPlayerController.resumePlaying();
+                    },
+                    child: Container(
+                        width: 60,
+                        height: 60,
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: Center(
+                          child: SvgPicture.asset(
+                            "assets/icons/play.svg",
+                            width: 20,
+                          ),
+                        ),
+                      ),
+                  ),
             ),
             SizedBox(width: 40),
             SvgPicture.asset(

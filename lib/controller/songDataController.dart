@@ -25,10 +25,6 @@ class SongDataController extends GetxController {
     );
   }
 
-  void playLocalSong(String url) async{
-    
-  }
-
 
   void storagePermission() async {
     try {
