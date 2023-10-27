@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:music_player/config/Colors.dart';
 import 'package:music_player/controller/SongPlayerController.dart';
+import 'package:music_player/controller/songDataController.dart';
 
 class SongControllerButtons extends StatelessWidget {
   const SongControllerButtons({super.key});
@@ -10,6 +11,7 @@ class SongControllerButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SongPlayerController songPlayerController = Get.put(SongPlayerController());
+    SongDataController songDataController = Get.put(SongDataController());
     return Column(
       children: [
         Obx(
@@ -47,9 +49,14 @@ class SongControllerButtons extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              "assets/icons/back.svg",
-              width: 20,
+            InkWell(
+              onTap: (){
+                songDataController.playPreviousSong();
+              },
+              child: SvgPicture.asset(
+                "assets/icons/back.svg",
+                width: 20,
+              ),
             ),
             SizedBox(width: 40),
             Obx(
@@ -98,7 +105,7 @@ class SongControllerButtons extends StatelessWidget {
             SizedBox(width: 40),
             InkWell(
               onTap: (){
-                songPlayerController.playNextSong();
+                songDataController.playNextSong();
               },
               child: SvgPicture.asset(
                 "assets/icons/next.svg",

@@ -9,9 +9,8 @@ import 'package:music_player/config/Colors.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class PlaySongPage extends StatelessWidget {
-  final String songTitle;
-  final String artistName;
-  const PlaySongPage({super.key, required this.songTitle, required this.artistName});
+
+  const PlaySongPage({super.key,});
 
 
   @override
@@ -29,8 +28,7 @@ class PlaySongPage extends StatelessWidget {
               SongAndValume(),
               SizedBox(height: 40),
               SongDetails(
-                  artistName: artistName,
-                  songTitle: songTitle,
+          
               ),
               SizedBox(height: 10),
               Spacer(),

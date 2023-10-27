@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 class SongPlayerController extends GetxController {
   final player = AudioPlayer();
@@ -8,21 +9,22 @@ class SongPlayerController extends GetxController {
   RxString totalTime = "0".obs;
   RxDouble sliderValue = 0.0.obs;
   RxDouble sliderMaxValue = 0.0.obs;
+  RxString songTitle = "".obs;
+  RxString songArtist = "".obs;
 
-  void playLocalAudio(String url) async {
+  void playLocalAudio(SongModel song) async {
+    songTitle.value = song.title;
+    songArtist.value = song.artist!;
+
     await player.setAudioSource(
       AudioSource.uri(
-        Uri.parse(url),
+        Uri.parse(song.data),
       ),
     );
 
     player.play();
     updatePosition();
     isPlaying.value = true;
-  }
-
-  void playNextSong() async {
-    player.seekToNext();
   }
 
   void resumePlaying() async {
