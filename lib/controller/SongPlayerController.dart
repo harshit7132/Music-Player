@@ -12,6 +12,8 @@ class SongPlayerController extends GetxController {
   RxString songTitle = "".obs;
   RxString songArtist = "".obs;
   RxBool isLoop = false.obs;
+  RxBool isSuffeled = false.obs;
+  RxDouble volumLavel = 0.2.obs;
 
   void playLocalAudio(SongModel song) async {
     songTitle.value = song.title;
@@ -28,6 +30,13 @@ class SongPlayerController extends GetxController {
     isPlaying.value = true;
   }
 
+  void chnageVolum(double volume)
+  {
+    volumLavel.value = volume;
+    player.setVolume(volumLavel.value);
+    print(volumLavel.value);
+  }
+
   void setLoopSong() async {
     if (isLoop.value) {
       await player.setLoopMode(LoopMode.off);
@@ -37,6 +46,14 @@ class SongPlayerController extends GetxController {
     isLoop.value = !isLoop.value;
   }
 
+  void playRandomSong() async {
+    if (isSuffeled.value) {
+      await player.setShuffleModeEnabled(false);
+    } else {
+      await player.setShuffleModeEnabled(true);
+    }
+    isSuffeled.value = !isSuffeled.value;
+  }
 
   void resumePlaying() async {
     isPlaying.value = true;

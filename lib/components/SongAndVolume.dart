@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:music_player/config/Colors.dart';
+import 'package:music_player/controller/SongPlayerController.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class SongAndValume extends StatelessWidget {
@@ -8,8 +10,8 @@ class SongAndValume extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  var value = 30.0;
-    return SfRadialGauge(
+    SongPlayerController songPlayerController = Get.put(SongPlayerController());
+    return Obx(() => SfRadialGauge(
       animationDuration: 1,
       enableLoadingAnimation: true,
       axes: [
@@ -20,7 +22,7 @@ class SongAndValume extends StatelessWidget {
           canRotateLabels: false,
           interval: 10,
           isInversed: false,
-          maximum: 100,
+          maximum: 1,
           minimum: 0,
           showAxisLine: true,
           showLabels: false,
@@ -28,16 +30,16 @@ class SongAndValume extends StatelessWidget {
           ranges: [
             GaugeRange(
               startValue: 0,
-              endValue: value,
+              endValue: songPlayerController.volumLavel.value,
               color: primaryColor,
             )
           ],
           pointers: [
             MarkerPointer(
               color: primaryColor,
-              value: value,
-              onValueChanged: (valuee) {
-              
+              value: songPlayerController.volumLavel.value,
+              onValueChanged: (value) {
+                songPlayerController.chnageVolum(value);
               },
               enableAnimation: true,
               enableDragging: true,
@@ -48,10 +50,10 @@ class SongAndValume extends StatelessWidget {
           ],
           annotations: [
             GaugeAnnotation(
-              horizontalAlignment: GaugeAlignment.center,
+              // horizontalAlignment: GaugeAlignment.center,
               widget: Container(
-                width: 280,
-                height: 280,
+                width: 220,
+                height: 220,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(1000),
                   image: DecorationImage(
@@ -64,6 +66,6 @@ class SongAndValume extends StatelessWidget {
           ],
         ),
       ],
-    );
+    ));
   }
 }
