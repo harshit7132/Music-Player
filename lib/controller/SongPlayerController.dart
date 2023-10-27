@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:music_player/Model/MySongModel.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class SongPlayerController extends GetxController {
@@ -14,14 +15,33 @@ class SongPlayerController extends GetxController {
   RxBool isLoop = false.obs;
   RxBool isSuffeled = false.obs;
   RxDouble volumLavel = 0.2.obs;
+  RxBool isCouldSoundPlaying = false.obs;
+  RxString albumUrl = "".obs;
 
   void playLocalAudio(SongModel song) async {
     songTitle.value = song.title;
     songArtist.value = song.artist!;
+    isCouldSoundPlaying.value = false;
 
     await player.setAudioSource(
       AudioSource.uri(
         Uri.parse(song.data),
+      ),
+    );
+
+    player.play();
+    updatePosition();
+    isPlaying.value = true;
+  }
+  void playCloudAudio(MySongModel song) async {
+    songTitle.value = song.title!;
+    songArtist.value = song.artist!;
+    albumUrl.value = song.albumArt!;
+    isCouldSoundPlaying.value = true;
+
+    await player.setAudioSource(
+      AudioSource.uri(
+        Uri.parse(song.data!),
       ),
     );
 

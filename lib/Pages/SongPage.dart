@@ -5,8 +5,10 @@ import 'package:music_player/components/SongTile.dart';
 import 'package:music_player/components/TrendingSogSlider.dart';
 import 'package:music_player/components/songHeader.dart';
 import 'package:music_player/config/Colors.dart';
+import 'package:music_player/controller/CloudSongController.dart';
 import 'package:music_player/controller/SongPlayerController.dart';
 import 'package:music_player/controller/songDataController.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 class SongPage extends StatelessWidget {
   const SongPage({super.key});
@@ -15,6 +17,7 @@ class SongPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SongDataController songDataController = Get.put(SongDataController());
     SongPlayerController songPlayerController = Get.put(SongPlayerController());
+    CloudSongController cloudSongController = Get.put(CloudSongController());
     return Scaffold(
         body: SafeArea(
       child: Padding(
@@ -77,7 +80,14 @@ class SongPage extends StatelessWidget {
                                 ))
                             .toList())
                     : Column(
-                        children: [],
+                        children: cloudSongController.cloudSongList.value.map((e) =>SongTile(
+                                  onPress: () {
+                                    songPlayerController.playCloudAudio(e);
+                                    songDataController.findCurrentSongPlayingIndex(e.id!);
+                                    Get.to(PlaySongPage());
+                                  },
+                                  songName: e.title!,
+                                ) ).toList(),
                       ),
               )
             ],

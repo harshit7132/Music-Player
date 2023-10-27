@@ -51,13 +51,27 @@ class SongAndValume extends StatelessWidget {
           annotations: [
             GaugeAnnotation(
               // horizontalAlignment: GaugeAlignment.center,
-              widget: Container(
-                width: 220,
-                height: 220,
+              widget: songPlayerController.isCouldSoundPlaying.value ? Container(
+                width: 270,
+                height: 270,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(1000),
                   image: DecorationImage(
-                    image: AssetImage("assets/images/cover.jpg"),
+                    image: NetworkImage(songPlayerController.albumUrl.value)
+                    ,
+                    fit: BoxFit.cover
+                  ),
+                  
+                  color: divColor,
+                ),
+              ) : Container(
+                width: 270,
+                height: 270,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(1000),
+                  image: DecorationImage(
+                    image:   AssetImage("assets/images/cover.jpg"),
+                     fit: BoxFit.cover
                   ),
                   color: divColor,
                 ),
