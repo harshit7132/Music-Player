@@ -11,6 +11,7 @@ class SongPlayerController extends GetxController {
   RxDouble sliderMaxValue = 0.0.obs;
   RxString songTitle = "".obs;
   RxString songArtist = "".obs;
+  RxBool isLoop = false.obs;
 
   void playLocalAudio(SongModel song) async {
     songTitle.value = song.title;
@@ -26,6 +27,16 @@ class SongPlayerController extends GetxController {
     updatePosition();
     isPlaying.value = true;
   }
+
+  void setLoopSong() async {
+    if (isLoop.value) {
+      await player.setLoopMode(LoopMode.off);
+    } else {
+      await player.setLoopMode(LoopMode.one);
+    }
+    isLoop.value = !isLoop.value;
+  }
+
 
   void resumePlaying() async {
     isPlaying.value = true;
