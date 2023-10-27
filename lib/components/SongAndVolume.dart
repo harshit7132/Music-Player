@@ -2,17 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:music_player/config/Colors.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-class SongAndValume extends StatefulWidget {
-  const SongAndValume({super.key});
+class SongAndValume extends StatelessWidget {
+  const SongAndValume({super.key, });
 
-  @override
-  State<SongAndValume> createState() => _SongAndValumeState();
-}
 
-class _SongAndValumeState extends State<SongAndValume> {
-  var value = 30.0;
   @override
   Widget build(BuildContext context) {
+  var value = 30.0;
     return SfRadialGauge(
       animationDuration: 1,
       enableLoadingAnimation: true,
@@ -41,9 +37,7 @@ class _SongAndValumeState extends State<SongAndValume> {
               color: primaryColor,
               value: value,
               onValueChanged: (valuee) {
-                setState(() {
-                  value = valuee;
-                });
+              
               },
               enableAnimation: true,
               enableDragging: true,

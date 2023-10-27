@@ -66,10 +66,13 @@ class SongPage extends StatelessWidget {
                     ? Column(
                         children: songDataController.localSongList.value
                             .map((e) => SongTile(
-                              onPress: (){
-                                  songPlayerController.playLocalAudio(e.data);
-                                  Get.to(PlaySongPage());
-                              },
+                                  onPress: () {
+                                    songPlayerController.playLocalAudio(e.data);
+                                    Get.to(PlaySongPage(
+                                      songTitle: e.title,
+                                      artistName: e.artist!,
+                                    ));
+                                  },
                                   songName: e.title,
                                 ))
                             .toList())

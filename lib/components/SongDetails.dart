@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SongDetails extends StatelessWidget {
-  const SongDetails({super.key});
+  final String songTitle;
+  final String artistName;
+  
+  const SongDetails({super.key, required this.songTitle, required this.artistName});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +25,12 @@ class SongDetails extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Tera bulawa aya h ma",
-              style: Theme.of(context).textTheme.bodyLarge,
+            Flexible(
+              child: Text(
+                "$songTitle",
+                maxLines: 1,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
             ),
             SvgPicture.asset(
               "assets/icons/download.svg",
@@ -37,7 +43,7 @@ class SongDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Jubain Nautiyal",
+              "$artistName",
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ],

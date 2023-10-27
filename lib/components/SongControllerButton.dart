@@ -12,16 +12,36 @@ class SongControllerButtons extends StatelessWidget {
     SongPlayerController songPlayerController = Get.put(SongPlayerController());
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("02:34"),
-            Text("/"),
-            Text(
-              "02:34",
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ],
+        Obx(
+          () => Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "${songPlayerController.currentTime}",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              Expanded(
+                  child: Obx(
+                () => Slider(
+                  value: songPlayerController.sliderValue.value
+                      .clamp(0.0, songPlayerController.sliderValue.value),
+                  onChanged: (value) {
+                    songPlayerController.sliderValue.value = value;
+
+                    Duration songPostion = Duration(seconds: value.toInt());
+                    songPlayerController.changeSongSlider(songPostion);
+
+                  },
+                  min: 0,
+                  max: songPlayerController.sliderMaxValue.value,
+                ),
+              )),
+              Text(
+                "${songPlayerController.totalTime}",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
         ),
         SizedBox(height: 20),
         Row(
@@ -35,10 +55,10 @@ class SongControllerButtons extends StatelessWidget {
             Obx(
               () => songPlayerController.isPlaying.value
                   ? InkWell(
-                    onTap: (){
-                      songPlayerController.pausePlaying();
-                    },
-                    child: Container(
+                      onTap: () {
+                        songPlayerController.pausePlaying();
+                      },
+                      child: Container(
                         width: 60,
                         height: 60,
                         padding: EdgeInsets.all(10),
@@ -53,12 +73,12 @@ class SongControllerButtons extends StatelessWidget {
                           ),
                         ),
                       ),
-                  )
+                    )
                   : InkWell(
-                    onTap: (){
-                      songPlayerController.resumePlaying();
-                    },
-                    child: Container(
+                      onTap: () {
+                        songPlayerController.resumePlaying();
+                      },
+                      child: Container(
                         width: 60,
                         height: 60,
                         padding: EdgeInsets.all(10),
@@ -73,12 +93,17 @@ class SongControllerButtons extends StatelessWidget {
                           ),
                         ),
                       ),
-                  ),
+                    ),
             ),
             SizedBox(width: 40),
-            SvgPicture.asset(
-              "assets/icons/next.svg",
-              width: 20,
+            InkWell(
+              onTap: (){
+                songPlayerController.playNextSong();
+              },
+              child: SvgPicture.asset(
+                "assets/icons/next.svg",
+                width: 20,
+              ),
             ),
           ],
         ),

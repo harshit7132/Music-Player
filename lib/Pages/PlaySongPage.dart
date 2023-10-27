@@ -8,18 +8,16 @@ import 'package:music_player/components/Songwave.dart';
 import 'package:music_player/config/Colors.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-class PlaySongPage extends StatefulWidget {
-  const PlaySongPage({super.key});
+class PlaySongPage extends StatelessWidget {
+  final String songTitle;
+  final String artistName;
+  const PlaySongPage({super.key, required this.songTitle, required this.artistName});
 
-  @override
-  State<PlaySongPage> createState() => _PlaySongPageState();
-}
 
-class _PlaySongPageState extends State<PlaySongPage> {
-  var value = 20.0;
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+  var value = 20.0;
+    return  Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(10),
@@ -30,7 +28,10 @@ class _PlaySongPageState extends State<PlaySongPage> {
               SizedBox(height: 10),
               SongAndValume(),
               SizedBox(height: 40),
-              SongDetails(),
+              SongDetails(
+                  artistName: artistName,
+                  songTitle: songTitle,
+              ),
               SizedBox(height: 10),
               Spacer(),
               SongControllerButtons(),
