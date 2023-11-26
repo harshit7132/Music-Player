@@ -1,11 +1,6 @@
 
 # 📙 Music Player App In Flutter
-This app is made for Listning Online and offline Music i have made this app in flutter if you want to see all Tutorial of This App in video format follow my.
-youtube channel ❤️ 
-<a href="https://www.github.com/MrNitishroy](https://mrnitishroy.github.io/)https://mrnitishroy.github.io](https://www.youtube.com/@flutterhero/videos" target="blank">FlutterHero</a>
-https://www.youtube.com/watch?v=4wOf50R2P9o&t=8147s&ab_channel=Flutterhero
-
-
+This app is made for Listning Online and offline Music i have made this app in flutter if you want to see all Tutorial of This App in video format follow me.
 
 
 ## Screenshots
@@ -56,10 +51,6 @@ https://www.youtube.com/watch?v=4wOf50R2P9o&t=8147s&ab_channel=Flutterhero
 
 Clone the project
 
-```bash
-  git clone https://github.com/MrNitishroy/Music-Player-app-In-Flutter
-```
-
 Open project in the vs code
 
 ```bash
@@ -78,5 +69,5 @@ run app
 
 ## Authors
 
-<a href="https://www.github.com/MrNitishroy](https://mrnitishroy.github.io/)https://mrnitishroy.github.io/" target="blank">Nitish Roy </a>
+<a href="https://www.github.com/harshit7132](https://harshit7132.github.io/)https://harshit7132.github.io/" target="blank">Harshit vuas </a>
 
